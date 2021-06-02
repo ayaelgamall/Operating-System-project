@@ -1,8 +1,7 @@
 import java.util.Hashtable;
 
 public class OS {
-    Hashtable<String,String> varString= new Hashtable<>();
-    Hashtable<String,Integer> varInt= new Hashtable<>();
+    Hashtable<String,Object> variables= new Hashtable<>();
 
     private static void print() {
     }
