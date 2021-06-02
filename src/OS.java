@@ -13,9 +13,21 @@ public class OS {
             interpret(br.readLine());
         }
     }
-      private static void print() {
 
+        private  void print(String x) {
+        }
 
+        
+            private void assign(String variable,Object value) {
+                variables.put(variable,value);
+            }
+
+        private void add(String x, String y ) {
+        }
+
+        private void writeFile(String fileName,String data) {
+        }
+        private void readFile(String fileName) {
         }
 
         private static void readFile() {
