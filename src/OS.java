@@ -14,24 +14,24 @@ public class OS {
         }
     }
 
-        private  void print(String x) {
-        }
+    private static void print(String x) {
+
+    }
 
 
-        private void assign(String variable,Object value) {
-            variables.put(variable,value);
-        }
+    private static void assign(String variable,Object value) {
+        variables.put(variable,value);
+    }
 
-        private void add(String x, String y ) {
-        }
+    private ststic void add(String x, String y ) {
+    }
 
-        private void writeFile(String fileName,String data) {
-        }
+    private static void writeFile(String fileName,String data) {
+    }
 
-        private void readFile(String fileName) {
-        }
-        
+    private static void readFile(String fileName) {
 
+    }
 
     public static void interpret(String s){
 
