@@ -6,20 +6,20 @@ public class OS {
 
     Hashtable<String,Object> variables= new Hashtable<>();
 
-    private  void print() {
+    private  void print(String x) {
     }
 
-    private void assign(String a,Object b) {
-        variables.put(a,b);
+    private void assign(String variable,Object value) {
+        variables.put(variable,value);
     }
 
-    private void add() {
+    private void add(String x, String y ) {
     }
 
-    private void writeFile() {
+    private void writeFile(String fileName,String data) {
     }
 
-    private void readFile() {
+    private void readFile(String fileName) {
     }
 
     public static void main(String[] args) {
