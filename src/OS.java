@@ -23,14 +23,15 @@ public class OS {
         variables.put(variable,value);
     }
 
-    private ststic void add(String x, String y ) {
+    private static void add(String x, String y ) {
     }
 
     private static void writeFile(String fileName,String data) {
     }
 
-    private static void readFile(String fileName) {
 
+    private Object readFile(String fileName) {
+        return null; //todo reading
     }
 
     public static void interpret(String s){
