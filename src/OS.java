@@ -30,30 +30,39 @@ public class OS {
     }
 
 
-    private static Object readFile(String fileName) {
+    private static String readFile(String fileName) {
         return null; //todo reading
     }
 
-    public static void interpret(String s){
+    public static void interpret(String s) {
 
-        String [] words = s.split(" ");
-        if(words[0].equals("assign")){
-            Object result=null;
-            switch(words[2]):
-            case ("input"):{
-                result=input();
-                break;
+        String[] words = s.split(" ");
+        if (words[0].equals("assign")) {
+            Object result = null;
+            switch (words[2])
+            {
+                case ("input"): {
+                    result = input();
+                    break;
+                }
+                case ("readFile"): {
+                    String fileName=words[3];
+                    result = readFile(fileName);
+                }
             }
-            case("readFile"){
-                result=readFile();
-            }
-            variables.replace(words[1],result);
-            }
-            else{
+        variables.replace(words[1], result);
+
+        } else {
 
         }
 
+    }
     public static String input(){
         //todo
+        return null;
+    }
+
+    public static void output(String output){
+           //todo
     }
 }
