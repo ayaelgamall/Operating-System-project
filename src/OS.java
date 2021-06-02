@@ -1,5 +1,3 @@
-import com.sun.applet2.AppletParameters;
-
 import java.util.Hashtable;
 
 public class OS {
