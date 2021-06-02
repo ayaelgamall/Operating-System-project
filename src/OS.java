@@ -37,32 +37,37 @@ public class OS {
     public static void interpret(String s) {
 
         String[] words = s.split(" ");
-        if (words[0].equals("assign")) {
-            Object result = null;
-            switch (words[2])
-            {
-                case ("input"): {
-                    result = input();
-                    break;
+        switch (words[0]) {
+            case ("assign"): {
+                Object result = null;
+                switch (words[2]) {
+                    case ("input"): {
+                        result = input();
+                        break;
+                    }
+                    case ("readFile"): {
+                        String fileName = words[3];
+                        result = readFile(fileName);
+                    }
                 }
-                case ("readFile"): {
-                    String fileName=words[3];
-                    result = readFile(fileName);
-                }
+                variables.replace(words[1], result);
+                break;
             }
-        variables.replace(words[1], result);
-
-        } else {
-
+            case ("writeFile"): {
+                writeFile(words[1],words[2]);
+                break;
+            }
+            case ("print"): {
+                print(variables.get(words[1]));
+                break;
+            }
         }
+
 
     }
     public static String input(){
         //todo
         return null;
     }
-
-    public static void output(String output){
-           //todo
-    }
+    
 }
