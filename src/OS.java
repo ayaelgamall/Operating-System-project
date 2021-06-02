@@ -7,15 +7,14 @@ public class OS {
 
     public static void main (String[] args)throws Exception{
         String programPath="";
-
         BufferedReader br = new BufferedReader(new FileReader(programPath));
         while(br.ready()){
             interpret(br.readLine());
         }
     }
 
-    private static void print(String x) {
-
+    private static void print(Object x) {
+        System.out.println(x.toString());
     }
 
 
@@ -50,6 +49,7 @@ public class OS {
                         result = readFile(fileName);
                     }
                 }
+                //should parse el integers abl ma save
                 variables.replace(words[1], result);
                 break;
             }
@@ -69,5 +69,5 @@ public class OS {
         //todo
         return null;
     }
-    
+
 }
