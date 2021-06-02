@@ -19,7 +19,8 @@ public class OS {
     private void writeFile(String fileName,String data) {
     }
 
-    private void readFile(String fileName) {
+    private Object readFile(String fileName) {
+        return null; //todo reading
     }
 
     public static void main(String[] args) {
