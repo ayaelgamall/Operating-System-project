@@ -1,21 +1,25 @@
+import com.sun.applet2.AppletParameters;
+
 import java.util.Hashtable;
 
 public class OS {
+
     Hashtable<String,Object> variables= new Hashtable<>();
 
-    private static void print() {
+    private  void print() {
     }
 
-    private static void assign() {
+    private void assign(String a,Object b) {
+        variables.put(a,b);
     }
 
-    private static void add() {
+    private void add() {
     }
 
-    private static void writeFile() {
+    private void writeFile() {
     }
 
-    private static void readFile() {
+    private void readFile() {
     }
 
     public static void main(String[] args) {
