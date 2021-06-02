@@ -1,8 +1,8 @@
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Hashtable;
 public class OS {
+
    static Hashtable<String,Object> variables= new Hashtable<>();
 
     public static void main (String[] args)throws Exception{
@@ -30,13 +30,30 @@ public class OS {
     }
 
 
-    private Object readFile(String fileName) {
+    private static Object readFile(String fileName) {
         return null; //todo reading
     }
 
     public static void interpret(String s){
 
+        String [] words = s.split(" ");
+        if(words[0].equals("assign")){
+            Object result=null;
+            switch(words[2]):
+            case ("input"):{
+                result=input();
+                break;
+            }
+            case("readFile"){
+                result=readFile();
+            }
+            variables.replace(words[1],result);
+            }
+            else{
+
+        }
+
+    public static String input(){
+        //todo
     }
-
-
 }
