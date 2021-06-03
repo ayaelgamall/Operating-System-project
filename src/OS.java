@@ -47,13 +47,19 @@ public class OS {
         fw.close();
     }
 
-    private static String readFile(String fileName) throws IOException {
+    private static String readFile(String fileName) {
         String filePath = "src/"+ fileName +".txt";
-        FileReader fr = new FileReader(filePath);
-        BufferedReader br = new BufferedReader(fr);
         String data = "";
-        while (br.ready())
-            data += br.readLine();
+
+        try {
+            FileReader fr = new FileReader(filePath);
+            BufferedReader br = new BufferedReader(fr);
+            while (br.ready())
+                data += br.readLine();
+        } catch (Exception e) {
+            print("File Does not Exist");
+        }
+
         return data;
     }
 
