@@ -6,9 +6,7 @@ public class OS {
     static Hashtable<String, Object> variables = new Hashtable<>();
 
     public static void main(String[] args) throws Exception {
-//        System.out.println("in");
         execute("src/Program 1.txt");
-//        System.out.println("done");
         execute("src/Program 2.txt");
         execute("src/Program 3.txt");
     }
