@@ -28,8 +28,8 @@ public class OS {
     }
 
     private static void add(String x, String y) {
-        int i1 = Integer.parseInt((String) variables.get(x));
-        int i2 = Integer.parseInt((String) variables.get(y));
+        int i1 = Integer.parseInt(variables.get(x));
+        int i2 = Integer.parseInt(variables.get(y));
         int res= i1 + i2;
         assign(x,""+res);
     }
