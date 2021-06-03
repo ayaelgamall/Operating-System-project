@@ -3,7 +3,7 @@ import java.util.Hashtable;
 
 public class OS {
 
-    static Hashtable<String, Object> variables = new Hashtable<>();
+    static Hashtable<String, String> variables = new Hashtable<>();
 
     public static void main(String[] args) throws Exception {
         execute("src/Program 1.txt");
@@ -19,37 +19,36 @@ public class OS {
     }
 
     private static void print(String x) {
-        if(variables.contains(x)) System.out.println(variables.get(x));
-        else System.out.println(x);
+        System.out.println(variables.getOrDefault(x, x));
     }
 
 
-    private static void assign(String variable, Object value) {
+    private static void assign(String variable, String value) {
         variables.put(variable, value);
     }
 
     private static void add(String x, String y) {
-        int i1 = Integer.parseInt(x);
-        int i2 = Integer.parseInt(y);
+        int i1 = Integer.parseInt((String) variables.get(x));
+        int i2 = Integer.parseInt((String) variables.get(y));
         int res= i1 + i2;
-        assign(x,res);
+        assign(x,""+res);
     }
 
     private static void writeFile(String fileName, String data) throws IOException {
-        File file = new File("src/"+ fileName +".java");
+        File file = new File("src/"+ fileName +".txt");
         if (file.createNewFile())
             System.out.println("File has been created.");
          else
             System.out.println("File already exists.");
 
-        String filePath = "src/"+ fileName +".java";
+        String filePath = "src/"+ fileName +".txt";
         FileWriter fw = new FileWriter(filePath);
         fw.write(data);
         fw.close();
     }
 
     private static String readFile(String fileName) throws IOException {
-        String filePath = "src/"+ fileName +".java";
+        String filePath = "src/"+ fileName +".txt";
         FileReader fr = new FileReader(filePath);
         BufferedReader br = new BufferedReader(fr);
         String data = "";
@@ -63,7 +62,7 @@ public class OS {
         String[] words = s.split(" ");
         switch (words[0]) {
             case ("assign"): {
-                Object result ;
+                String result ;
                 switch (words[2]) {
                     case ("input"): {
                         result = input();
