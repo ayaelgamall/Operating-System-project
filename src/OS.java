@@ -6,9 +6,9 @@ public class OS {
     static Hashtable<String, String> variables = new Hashtable<>();
 
     public static void main(String[] args) throws Exception {
-        execute("src/Program 1.txt");
-        execute("src/Program 2.txt");
-        execute("src/Program 3.txt");
+        execute("Program 1.txt");
+        execute("Program 2.txt");
+        execute("Program 3.txt");
     }
 
     private static void execute(String programPath) throws IOException {
@@ -19,10 +19,7 @@ public class OS {
     }
 
     private static void print(String x) {
-        String res = readMemory(x);
-        if (res != null)
-            System.out.println(res);
-         else System.out.println(x);
+        System.out.println(variables.getOrDefault(x, x));
     }
 
 
@@ -32,82 +29,65 @@ public class OS {
 
 
     private static void add(String x, String y) {
-        int i1 = Integer.parseInt(readMemory(x));
-        int i2 = Integer.parseInt(readMemory(y));
+        int i1 = Integer.parseInt(variables.getOrDefault(x, x));
+        int i2 = Integer.parseInt(variables.getOrDefault(y, y));
         int res= i1 + i2;
         assign(x,""+res);
     }
 
-    private static String readMemory(String x) {
-        return variables.get(x);
-    }
 
-    private static void writeFile(String fileName, String data) throws IOException {
-        File file = new File("src/"+ fileName +".txt");
+    private static void writeFile(String fileNameVar, String dataVar) throws IOException {
+        String fileName=variables.getOrDefault(fileNameVar, fileNameVar);
+        String  data = variables.getOrDefault(dataVar, dataVar);
+        File file = new File( fileName );
         if (file.createNewFile())
             System.out.println("File has been created.");
          else
             System.out.println("File already exists.");
 
-        String filePath = "src/"+ fileName +".txt";
-        FileWriter fw = new FileWriter(filePath);
+//        String filePath = "src/"+ fileName +".txt";
+        FileWriter fw = new FileWriter(fileName);
         fw.write(data);
         fw.close();
     }
 
-    private static String readFile(String fileName) {
-        String filePath = "src/"+ fileName +".txt";
-        String data = "";
+    private static String readFile(String fileNameVar) {
+        String fileName=variables.getOrDefault(fileNameVar, fileNameVar);
+//        String filePath = "src/"+ fileName +".txt";
+        StringBuilder data = new StringBuilder();
 
         try {
-            FileReader fr = new FileReader(filePath);
+            FileReader fr = new FileReader(fileName);
             BufferedReader br = new BufferedReader(fr);
             while (br.ready())
-                data += br.readLine();
+                data.append(br.readLine());
         } catch (Exception e) {
             print("File Does not Exist");
         }
 
-        return data;
+        return data.toString();
     }
 
     public static void interpret(String s) throws IOException {
 
         String[] words = s.split(" ");
         switch (words[0]) {
-            case ("assign"): {
-                String result ;
+            case ("assign") -> {
+                String result;
                 switch (words[2]) {
-                    case ("input"): {
-                        result = input();
-                        break;
-                    }
-                    case ("readFile"): {
+                    case ("input") -> result = input();
+                    case ("readFile") -> {
                         String fileName = words[3];
                         result = readFile(fileName);
-                        break;
                     }
-                    default:result=words[2];
+                    default -> result = words[2];
                 }
                 assign(words[1], result);
-                break;
             }
-            case ("writeFile"): {
-                writeFile(words[1], words[2]);
-                break;
-            }
-            case ("print"): {
-                print(words[1]);
-                break;
-            }
-            case ("readFile"): {
-                readFile(words[1]);
-                break;
-            }
-            case ("add"): {
-                add(words[1], words[2]);
-                break;
-            }
+            case ("writeFile") -> writeFile(words[1], words[2]);
+            case ("print") -> print(words[1]);
+            case ("readFile") -> readFile(words[1]);
+            case ("add") -> add(words[1], words[2]);
         }
 
 

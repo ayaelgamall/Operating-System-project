@@ -1,0 +1,2 @@
+-Any Filename is the whole path that will be called
+-If you read from a non existing file the data will be empty string
