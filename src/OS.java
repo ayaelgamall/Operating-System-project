@@ -19,7 +19,10 @@ public class OS {
     }
 
     private static void print(String x) {
-        System.out.println(variables.getOrDefault(x, x));
+        String res = readMemory(x);
+        if (res != null)
+            System.out.println(res);
+         else System.out.println(x);
     }
 
 
