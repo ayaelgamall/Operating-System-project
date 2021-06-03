@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Hashtable;
 
 public class OS {
@@ -9,9 +6,11 @@ public class OS {
     static Hashtable<String, Object> variables = new Hashtable<>();
 
     public static void main(String[] args) throws Exception {
-        execute("Program 1.txt");
-        execute("Program 2.txt");
-        execute("Program 3.txt");
+//        System.out.println("in");
+        execute("src/Program 1.txt");
+//        System.out.println("done");
+        execute("src/Program 2.txt");
+        execute("src/Program 3.txt");
     }
 
     private static void execute(String programPath) throws IOException {
@@ -32,17 +31,33 @@ public class OS {
     }
 
     private static void add(String x, String y) {
-        //todo extract from variables parse then add in res
-        int res=0;
+        int i1 = Integer.parseInt(x);
+        int i2 = Integer.parseInt(y);
+        int res= i1 + i2;
         assign(x,res);
     }
 
-    private static void writeFile(String fileName, String data) {
-        //todo if does not exist filename create
+    private static void writeFile(String fileName, String data) throws IOException {
+        File file = new File("src/"+ fileName +".java");
+        if (file.createNewFile())
+            System.out.println("File has been created.");
+         else
+            System.out.println("File already exists.");
+
+        String filePath = "src/"+ fileName +".java";
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(data);
+        fw.close();
     }
 
-    private static String readFile(String fileName) {
-        return null; //todo reading from file
+    private static String readFile(String fileName) throws IOException {
+        String filePath = "src/"+ fileName +".java";
+        FileReader fr = new FileReader(filePath);
+        BufferedReader br = new BufferedReader(fr);
+        String data = "";
+        while (br.ready())
+            data += br.readLine();
+        return data;
     }
 
     public static void interpret(String s) throws IOException {
@@ -72,6 +87,14 @@ public class OS {
             }
             case ("print"): {
                 print(words[1]);
+                break;
+            }
+            case ("readFile"): {
+                readFile(words[1]);
+                break;
+            }
+            case ("add"): {
+                add(words[1], words[2]);
                 break;
             }
         }
