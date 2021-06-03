@@ -27,11 +27,16 @@ public class OS {
         variables.put(variable, value);
     }
 
+
     private static void add(String x, String y) {
-        int i1 = Integer.parseInt(variables.get(x));
-        int i2 = Integer.parseInt(variables.get(y));
+        int i1 = Integer.parseInt(readMemory(x));
+        int i2 = Integer.parseInt(readMemory(y));
         int res= i1 + i2;
         assign(x,""+res);
+    }
+
+    private static String readMemory(String x) {
+        return variables.get(x);
     }
 
     private static void writeFile(String fileName, String data) throws IOException {
