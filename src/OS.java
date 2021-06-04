@@ -3,42 +3,39 @@ import java.util.Hashtable;
 
 public class OS {
 
-    static Hashtable<String, String> variables = new Hashtable<>();
-
-    public static void main(String[] args) throws Exception {
-        execute("Program 1.txt");
-        execute("Program 2.txt");
-        execute("Program 3.txt");
+   private static Hashtable<String, String> variables = new Hashtable<>();
+   
+    
+    public static void print(String x) {
+        System.out.println(readMemory(x));
     }
 
-    private static void execute(String programPath) throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader(programPath));
-        while (br.ready()) {
-            interpret(br.readLine());
-        }
-    }
-
-    private static void print(String x) {
-        System.out.println(variables.getOrDefault(x, x));
+    private static String readMemory(String x) {
+        //if exists in memory get it else return the same x
+        return variables.getOrDefault(x, x);
     }
 
 
-    private static void assign(String variable, String value) {
-        variables.put(variable, value);
+    public static void assign(String variable, String value) {
+        writeMemory(variable, value);
+    }
+
+    private static void writeMemory(String variable, String value) {
+         variables.put(variable, value);
     }
 
 
-    private static void add(String x, String y) {
-        int i1 = Integer.parseInt(variables.getOrDefault(x, x));
-        int i2 = Integer.parseInt(variables.getOrDefault(y, y));
+    public static void add(String x, String y) {
+        int i1 = Integer.parseInt(readMemory(x));
+        int i2 = Integer.parseInt(readMemory(y));
         int res= i1 + i2;
-        assign(x,""+res);
+        writeMemory(x,""+res);
     }
 
 
-    private static void writeFile(String fileNameVar, String dataVar) throws IOException {
-        String fileName=variables.getOrDefault(fileNameVar, fileNameVar);
-        String  data = variables.getOrDefault(dataVar, dataVar);
+    public static void writeFile(String fileNameVar, String dataVar) throws IOException {
+        String fileName= readMemory(fileNameVar);
+        String  data = readMemory(dataVar);
         File file = new File( fileName );
         if (file.createNewFile())
             System.out.println("File has been created.");
@@ -51,8 +48,8 @@ public class OS {
         fw.close();
     }
 
-    private static String readFile(String fileNameVar) {
-        String fileName=variables.getOrDefault(fileNameVar, fileNameVar);
+    public static String readFile(String fileNameVar) {
+        String fileName= readMemory(fileNameVar);
 //        String filePath = "src/"+ fileName +".txt";
         StringBuilder data = new StringBuilder();
 
@@ -68,44 +65,9 @@ public class OS {
         return data.toString();
     }
 
-    public static void interpret(String s) throws IOException {
+    
 
-        String[] words = s.split(" ");
-        switch (words[0]) {
-            case ("assign"):
-                String result;
-                switch (words[2]) {
-                    case ("input"):
-                        result = input();
-                        break;
-                    case ("readFile"):
-                        String fileName = words[3];
-                        result = readFile(fileName);
-                        break;
-                    default:
-                        result = words[2];
-                        break;
-                }
-                assign(words[1], result);
-                break;
-            case ("writeFile"):
-                writeFile(words[1], words[2]);
-                break;
-            case ("print"):
-                print(words[1]);
-                break;
-            case ("readFile"):
-                readFile(words[1]);
-                break;
-            case ("add"):
-                add(words[1], words[2]);
-                break;
-        }
-
-
-    }
-
-    private static String input() throws IOException {
+    public static String input() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         return br.readLine();
     }
