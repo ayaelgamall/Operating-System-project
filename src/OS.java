@@ -72,22 +72,34 @@ public class OS {
 
         String[] words = s.split(" ");
         switch (words[0]) {
-            case ("assign") -> {
+            case ("assign"):
                 String result;
                 switch (words[2]) {
-                    case ("input") -> result = input();
-                    case ("readFile") -> {
+                    case ("input"):
+                        result = input();
+                        break;
+                    case ("readFile"):
                         String fileName = words[3];
                         result = readFile(fileName);
-                    }
-                    default -> result = words[2];
+                        break;
+                    default:
+                        result = words[2];
+                        break;
                 }
                 assign(words[1], result);
-            }
-            case ("writeFile") -> writeFile(words[1], words[2]);
-            case ("print") -> print(words[1]);
-            case ("readFile") -> readFile(words[1]);
-            case ("add") -> add(words[1], words[2]);
+                break;
+            case ("writeFile"):
+                writeFile(words[1], words[2]);
+                break;
+            case ("print"):
+                print(words[1]);
+                break;
+            case ("readFile"):
+                readFile(words[1]);
+                break;
+            case ("add"):
+                add(words[1], words[2]);
+                break;
         }
 
 
