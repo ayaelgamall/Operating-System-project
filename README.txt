@@ -1,2 +1,3 @@
--Any Filename is the whole path that will be called
+-Any Filename is the whole path that will be called with the extension (readFile , writeFile)
 -If you read from a non existing file the data will be empty string
+-The priority to any method parameter is to be a variable name if does not find it assume it is the value itself
