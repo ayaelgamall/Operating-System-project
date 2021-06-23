@@ -3,9 +3,8 @@ import java.util.Hashtable;
 
 public class OS {
 
-   private static Hashtable<String, String> variables = new Hashtable<>();
-
-    private static Object [] memory; //3yzen n5leha pairs aw 7aga + fixed size
+    private static Hashtable<String, String> variables = new Hashtable<>();
+    private static Word [] memory; //3yzen n5leha pairs aw 7aga + fixed size
     private static int IDs =0; //increment w each process
     static int PC = 0; //idk hngebo mnen
     public static int index;
@@ -110,4 +109,13 @@ public class OS {
         Finished
     }
 
+    public static class Word {
+        String type;
+        Object value;
+        public Word(String t, Object v){
+            value=v;
+            type=t;
+        }
+
+    }
 }
