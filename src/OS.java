@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Hashtable;
 public class OS {
 
-    private static Hashtable<String, String> variables = new Hashtable<>();
+//    private static Hashtable<String, String> variables = new Hashtable<>(); should use memory[] instead
     private static Word [] memory= new Word[1000];
     private static int PID =0; //increment with each process
     static int PC = 0; //idk hngebo mnen
@@ -77,12 +77,12 @@ public class OS {
         //mesh el boundaries el mafroud bta3et el instructions nafsaha mesh el PCB?
     }
     public static void storeProgramInstructions(String filePath) {
-        //7ad yerage3 waraya pls
+        //7ad yerage3 waraya
         //BufferedReader lel program file
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         //put each instruction in a new index fel memory
         while(br.hasNext()){
-             memory[++index] =  new Word("Instruction",br.next()); //lw b2et mem[index++] 5ly el boundaryS index++
+             memory[++index] =  new Word("Instruction",br.next());
         }
     }
     public static int assignID() {
@@ -90,7 +90,8 @@ public class OS {
     }
     public static void main(String[] args) {
         //read processes in order
-        //call initializeProcess for each one
+        //call initializePCB for each one
+        //call storeProgramInstructions
         //store variables (in memory brdo)
         //after doing that for all 3 processes
         //start scheduler
