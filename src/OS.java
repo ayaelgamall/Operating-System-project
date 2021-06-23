@@ -4,6 +4,11 @@ import java.util.Hashtable;
 public class OS {
 
    private static Hashtable<String, String> variables = new Hashtable<>();
+
+    private static Object [] memory; //3yzen n5leha pairs aw 7aga + fixed size
+    private static int IDs =0; //increment w each process
+    static int PC = 0; //idk hngebo mnen
+    public static int index;
    
     
     public static void print(String x) {
@@ -72,11 +77,7 @@ public class OS {
         return br.readLine();
     }
 
-//    private static Hashtable<String, String> variables = new Hashtable<>();
-//    private static Object [] memory; //3yzen n5leha pairs aw 7aga + fixed size
-//    private static int IDs =0; //increment w each process
-//    static int PC = 0; //idk hngebo mnen
-//    public static int index;
+
 //
 //
 //    public static void initializePCB(String process) {
@@ -101,12 +102,12 @@ public class OS {
 //        //2 instruction for each process then preemt
 //        //keep going till all processes finished
 //    }
-//
-//
-//    public enum state {
-//        Running,
-//        NotRunnig,
-//        Finished
-//    }
+
+
+    public enum state {
+        Running,
+        NotRunnig,
+        Finished
+    }
 
 }
