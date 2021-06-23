@@ -73,7 +73,17 @@ public class OS {
         memory[++index] =  new Word("startPC",PC);
         memory[++index] =  new Word("ID:", assignID());
         memory[++index] =  new Word("State", state.NotRunnig);
-        memory[++index] =  new Word("Upper Boundary",index+1); //lw b2et mem[index++] 5ly el boundaryS index++
+        memory[++index] =  new Word("Upper Boundary",index+1);
+        //mesh el boundaries el mafroud bta3et el instructions nafsaha mesh el PCB?
+    }
+    public static void storeProgramInstructions(String filePath) {
+        //7ad yerage3 waraya pls
+        //BufferedReader lel program file
+        BufferedReader br = new BufferedReader(new FileReader(filePath));
+        //put each instruction in a new index fel memory
+        while(br.hasNext()){
+             memory[++index] =  new Word("Instruction",br.next()); //lw b2et mem[index++] 5ly el boundaryS index++
+        }
     }
     public static int assignID() {
         return PID++;
