@@ -72,4 +72,41 @@ public class OS {
         return br.readLine();
     }
 
+//    private static Hashtable<String, String> variables = new Hashtable<>();
+//    private static Object [] memory; //3yzen n5leha pairs aw 7aga + fixed size
+//    private static int IDs =0; //increment w each process
+//    static int PC = 0; //idk hngebo mnen
+//    public static int index;
+//
+//
+//    public static void initializePCB(String process) {
+//        // change the way the info is stored when we change the mem array type
+//        //++index wla index++   ???
+//        memory[index] = "lower Boundary:"+ index;
+//        memory[++index] = "startPC:" + PC;
+//        memory[++index] = "ID:" + assignID();
+//        memory[++index] = "State:" + state.NotRunnig ;
+//        memory[++index] = "Upper Boundary:" + index; //lw b2et mem[index++] 5ly el boundaryS index++
+//
+//    }
+//    public static int assignID() {
+//        return IDs++;
+//    }
+//    public static void main(String[] args) {
+//        //read processes in order
+//        //call initializeProcess for each one
+//        //store variables (in memory brdo)
+//        //after doing that for all 3 processes
+//        //start scheduler
+//        //2 instruction for each process then preemt
+//        //keep going till all processes finished
+//    }
+//
+//
+//    public enum state {
+//        Running,
+//        NotRunnig,
+//        Finished
+//    }
+
 }

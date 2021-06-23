@@ -11,12 +11,18 @@ public class Parser {
 
     private static void execute(String programPath) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(programPath));
-        while (br.ready()) {
-            interpret(br.readLine());
+
+        int i = 0;
+        // 3shan 2 instructions per quantum
+
+        while (br.ready() && i < 2) {
+            interpret(br.readLine(), 0); //ngeeb el pc mn el pcb
+            i++;
         }
     }
-    public static void interpret(String s) throws IOException {
+    public static void interpret(String s, int PC) throws IOException {
 
+        // el pc m7tag ykon bta3 kol process lw7daha w yb2a stored s7;
         String[] words = s.split(" ");
         switch (words[0]) {
             case ("assign"):
@@ -48,7 +54,7 @@ public class Parser {
                 OS.add(words[1], words[2]);
                 break;
         }
-
+        //increment pc hena
 
     }
 }
