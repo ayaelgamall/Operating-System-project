@@ -16,20 +16,27 @@ public class OS {
     private static String readMemory(String x, int i) {
         //if exists in memory get it else return the same x
 //         return variables.getOrDefault(x, x);
+        String res = x;
         for (;  memory[i]!=null && !memory[i].key.equals("Instruction"); i++) {
             if (memory[i].key.equals(x))
                 return (String) memory[i].value;
         }
         return x;
+        //todo print
     }
 
     public static void assign(String variable, String value, int lower) {
         writeMemory(variable, value,lower);
     }
 
-    private static void writeMemory(String variable, String value, int lower) {
+    private static void writeMemory(String variable, String value, int i) {
 //        variables.put(variable, value);
-        //todo this store the variables in the memory itself
+        for (; !memory[i].key.equals("Instruction"); i++) {
+            if(memory[i]!=null) continue;
+            memory[i]= new Word(variable,value);
+            return;
+        }
+        //todo print
     }
 
     public static void add(String x, String y, int lower) {
@@ -149,6 +156,7 @@ public class OS {
              else
                  readyQueue.add(id);
         }
+        //todo print
     }
 
 
