@@ -138,7 +138,9 @@ public class OS {
              int pcIdx = 0;
              int stateIdx = 0;
              if(id!= oldId) {
-                 i=0; oldId=id;
+                 if(oldId!=-1) System.out.println("The Process with id :"+ oldId+" finished execution with quanta "+ i);
+                 System.out.println("The Process with id :"+id+" has been chosen to run from ready list");
+                 i=1; oldId=id;
              }
             for (int k = 0; k <100 ; k+=5)
                 if(memory[k]!=null && memory[k].value.equals(id)){
@@ -154,6 +156,7 @@ public class OS {
                  Parser.interpret((String) memory[pc].value,lower);
                 (memory[pcIdx].value)= ++pc;
              }
+             i--;
             memory[stateIdx].value=state.NotRunning;
              if(pc==upper)
                  memory[stateIdx].value=state.Finished;
