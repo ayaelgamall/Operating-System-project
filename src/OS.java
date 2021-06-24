@@ -4,6 +4,7 @@ public class OS {
 
     private static Word [] memory= new Word[1000];
     private static int PID =0; //increment with each process
+    static int PC = 0; //idk hngebo mnen
     public static int index=99;
     public static int pcbindex=-1;
 
@@ -76,7 +77,7 @@ public class OS {
         memory[++pcbindex] =  new Word("ID:", assignID());
         memory[++pcbindex] = new Word("lower Boundary", lower);
         memory[++pcbindex] =  new Word("Upper Boundary",index+1);
-        memory[++pcbindex] =  new Word("startPC",lower);
+        memory[++pcbindex] =  new Word("startPC",PC);
         memory[++pcbindex] =  new Word("State", state.NotRunnig);
     }
     public static void storeProgramInstructions(String filePath) throws IOException {
@@ -84,7 +85,7 @@ public class OS {
         //BufferedReader lel program file
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         //put each instruction in a new index fel memory
-        int lowerBoundary = index+1; //wla ++index idk?
+        int lowerBoundary = index; //wla ++index idk?
         while(br.ready()){
              memory[++index] =  new Word("Instruction",br.readLine());
         }
