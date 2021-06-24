@@ -12,16 +12,11 @@ public class Parser {
 
     private static void execute(String programPath) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(programPath));
-//el mafroud dlwa2ty ye2ra el instructions mn el memory mesh mn el file directly
-        int i = 0;
-        // 3shan 2 instructions per quantum
-        //nkhali eih condition el loop? Boundary?
-        while (br.ready() && i < 2) {
-            interpret(br.readLine(), 0); //ngeeb el pc mn el pcb
-            i++;
+        while (br.ready()) {
+            interpret(br.readLine(),0);
         }
     }
-    public static void interpret(String s, int PC) throws IOException {
+    public static void interpret(String s, int lower) throws IOException {
 
         // el pc m7tag ykon bta3 kol process lw7daha w yb2a stored s7;
         String[] words = s.split(" ");
@@ -40,10 +35,10 @@ public class Parser {
                         result = words[2];
                         break;
                 }
-                OS.assign(words[1], result);
+                OS.assign(words[1], result,lower);
                 break;
             case ("writeFile"):
-                OS.writeFile(words[1], words[2]);
+                OS.writeFile(words[1], words[2],lower);
                 break;
             case ("print"):
                 OS.print(words[1]);
@@ -55,7 +50,6 @@ public class Parser {
                 OS.add(words[1], words[2]);
                 break;
         }
-        //increment pc hena
 
     }
 }
