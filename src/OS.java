@@ -34,10 +34,12 @@ public class OS {
     private static void writeMemory(String variable, String value, int i) {
 //        variables.put(variable, value);
         for (; i<memory.length; i++) {
-            if(memory[i]!=null) continue;
+            if(memory[i]==null|| memory[i].key.equals(variable)){
             memory[i]= new Word(variable,value);
             System.out.println("Word written to the memory is :" +memory[i].toString()+" , its index is :"+i);
             return;
+            }
+            else if(memory[i].key.equals("Instruction"))return;
         }
     }
 
@@ -141,7 +143,7 @@ public class OS {
              int pcIdx = 0;
              int stateIdx = 0;
              if(id!= oldId) {
-                 if(oldId!=-1) System.out.println("The Process with id : "+ oldId+" finished execution with quanta "+ i);
+                 if(oldId!=-1) System.out.println("The Process with id : "+ oldId+" finished execution with quanta "+ i+"\n");
                  System.out.println("The Process with id : "+id+" has been chosen to run from ready list");
                  i=1; oldId=id;
              }
@@ -166,6 +168,8 @@ public class OS {
              else
                  readyQueue.add(id);
         }
+        if(i!=0)
+            System.out.println("The Process with id : "+ oldId+" finished execution with quanta "+ i);
     }
 
 
