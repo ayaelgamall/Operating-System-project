@@ -85,7 +85,7 @@ public class OS {
         //BufferedReader lel program file
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         //put each instruction in a new index fel memory
-        int lowerBoundary = index; //wla ++index idk?
+        int lowerBoundary = index+1; 
         while(br.ready()){
              memory[++index] =  new Word("Instruction",br.readLine());
         }
