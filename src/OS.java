@@ -76,13 +76,13 @@ public class OS {
         memory[++index] =  new Word("Upper Boundary",index+1);
         //mesh el boundaries el mafroud bta3et el instructions nafsaha mesh el PCB?
     }
-    public static void storeProgramInstructions(String filePath) {
+    public static void storeProgramInstructions(String filePath) throws IOException {
         //7ad yerage3 waraya
         //BufferedReader lel program file
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         //put each instruction in a new index fel memory
-        while(br.hasNext()){
-             memory[++index] =  new Word("Instruction",br.next());
+        while(br.ready()){
+             memory[++index] =  new Word("Instruction",br.readLine());
         }
     }
     public static int assignID() {
@@ -108,7 +108,7 @@ public class OS {
     public static class Word {
         String key;
         Object value;
-        public Word(key k, Object v){
+        public Word(String k, Object v){
             value=v;
             key=k;
         }

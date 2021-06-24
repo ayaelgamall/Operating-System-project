@@ -10,7 +10,7 @@ public class Parser {
     }
 
     private static void execute(String programPath) throws IOException {
-//        BufferedReader br = new BufferedReader(new FileReader(programPath));
+        BufferedReader br = new BufferedReader(new FileReader(programPath));
 //el mafroud dlwa2ty ye2ra el instructions mn el memory mesh mn el file directly
         int i = 0;
         // 3shan 2 instructions per quantum
