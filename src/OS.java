@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.Hashtable;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class OS {
 
@@ -11,37 +9,39 @@ public class OS {
     public static int pcbIndex =-1;
     static LinkedList<Integer> readyQueue=new LinkedList<>() ;
 
-    public static void print(String x) {
-        System.out.println(readMemory(x));
+    public static void print(String x, int lower) {
+        System.out.println(readMemory(x,lower));
     }
 
-    private static String readMemory(String x) {
+    private static String readMemory(String x, int i) {
         //if exists in memory get it else return the same x
 //         return variables.getOrDefault(x, x);
-        //todo get vars from memory
-
-        return null;
+        for (;  memory[i]!=null && !memory[i].key.equals("Instruction"); i++) {
+            if (memory[i].key.equals(x))
+                return (String) memory[i].value;
+        }
+        return x;
     }
 
     public static void assign(String variable, String value, int lower) {
-        writeMemory(variable, value);
+        writeMemory(variable, value,lower);
     }
 
-    private static void writeMemory(String variable, String value) {
+    private static void writeMemory(String variable, String value, int lower) {
 //        variables.put(variable, value);
         //todo this store the variables in the memory itself
     }
 
-    public static void add(String x, String y) {
-        int i1 = Integer.parseInt(readMemory(x));
-        int i2 = Integer.parseInt(readMemory(y));
+    public static void add(String x, String y, int lower) {
+        int i1 = Integer.parseInt(readMemory(x,lower));
+        int i2 = Integer.parseInt(readMemory(y,lower));
         int res= i1 + i2;
-        writeMemory(x,""+res);
+        writeMemory(x,""+res, lower);
     }
 
     public static void writeFile(String fileNameVar, String dataVar, int lower) throws IOException {
-        String fileName= readMemory(fileNameVar);
-        String  data = readMemory(dataVar);
+        String fileName= readMemory(fileNameVar,lower);
+        String  data = readMemory(dataVar,lower);
         File file = new File( fileName );
         if (file.createNewFile())
             System.out.println("File has been created.");
@@ -53,8 +53,8 @@ public class OS {
         fw.close();
     }
 
-    public static String readFile(String fileNameVar) {
-        String fileName= readMemory(fileNameVar);
+    public static String readFile(String fileNameVar, int lower) {
+        String fileName= readMemory(fileNameVar,lower);
         StringBuilder data = new StringBuilder();
 
         try {
@@ -63,7 +63,7 @@ public class OS {
             while (br.ready())
                 data.append(br.readLine());
         } catch (Exception e) {
-            print("File Does not Exist");
+            print("File Does not Exist", lower);
         }
         return data.toString();
     }
@@ -79,7 +79,7 @@ public class OS {
         memory[++pcbIndex] =  new Word("Upper Boundary",index+1);
         memory[++pcbIndex] = new Word("lower Boundary", lower);
         memory[++pcbIndex] =  new Word("startPC",pc);
-        memory[++pcbIndex] =  new Word("State", state.NotRunnig);
+        memory[++pcbIndex] =  new Word("State", state.NotRunning);
         return id;
     }
     public static int storeProgramInstructions(String filePath) throws IOException {
@@ -143,20 +143,20 @@ public class OS {
                  Parser.interpret((String) memory[pc].value,lower);
                 (memory[pcIdx].value)= ++pc;
              }
-            memory[stateIdx].value=state.NotRunnig;
+            memory[stateIdx].value=state.NotRunning;
              if(pc==upper)
-                 delete(id);
+                 memory[stateIdx].value=state.Finished;
              else
                  readyQueue.add(id);
         }
     }
 
-    private static void delete(int id) {
-    }
+
 
     public enum state {
         Running,
-        NotRunnig
+        NotRunning,
+        Finished
     }
 
     public static class Word {

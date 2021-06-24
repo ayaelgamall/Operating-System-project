@@ -29,7 +29,7 @@ public class Parser {
                         break;
                     case ("readFile"):
                         String fileName = words[3];
-                        result = OS.readFile(fileName);
+                        result = OS.readFile(fileName, lower);
                         break;
                     default:
                         result = words[2];
@@ -41,13 +41,13 @@ public class Parser {
                 OS.writeFile(words[1], words[2],lower);
                 break;
             case ("print"):
-                OS.print(words[1]);
+                OS.print(words[1],lower);
                 break;
             case ("readFile"):
-                OS.readFile(words[1]);
+                OS.readFile(words[1],lower);
                 break;
             case ("add"):
-                OS.add(words[1], words[2]);
+                OS.add(words[1], words[2],lower);
                 break;
         }
 
