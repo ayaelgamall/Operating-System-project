@@ -33,7 +33,7 @@ public class OS {
 
     private static void writeMemory(String variable, String value, int i) {
 //        variables.put(variable, value);
-        for (; !memory[i].key.equals("Instruction"); i++) {
+        for (; i<memory.length; i++) {
             if(memory[i]!=null) continue;
             memory[i]= new Word(variable,value);
             System.out.println("Word written to the memory is :" +memory[i].toString()+" , its index is :"+i);
@@ -83,17 +83,19 @@ public class OS {
     }
 
     public static int initializePCB(int lower,int pc) {
-        //todo print
+
+        String s ="and its PCB is : \n " ;
         int id =assignID();
-        memory[++pcbIndex] =  new Word("ID:",id );
-        memory[++pcbIndex] =  new Word("Upper Boundary",index+1);
-        memory[++pcbIndex] = new Word("lower Boundary", lower);
-        memory[++pcbIndex] =  new Word("startPC",pc);
-        memory[++pcbIndex] =  new Word("State", state.NotRunning);
+        memory[++pcbIndex] =  new Word("ID:",id );s+=memory[pcbIndex]+", at index :" + pcbIndex +"\n";
+        memory[++pcbIndex] =  new Word("Upper Boundary",index+1);s+=memory[pcbIndex]+", at index : " + pcbIndex +"\n";
+        memory[++pcbIndex] = new Word("lower Boundary", lower);s+=memory[pcbIndex]+", at index : " + pcbIndex +"\n";
+        memory[++pcbIndex] =  new Word("startPC",pc);s+=memory[pcbIndex]+", at index : " + pcbIndex +"\n";
+        memory[++pcbIndex] =  new Word("State", state.NotRunning);s+=memory[pcbIndex]+", at index " + pcbIndex +"\n";
+        System.out.println(s);
         return id;
     }
     public static int storeProgramInstructions(String filePath) throws IOException {
-        //todo print
+        System.out.println("Memory access in Process creation to add ");
         //7ad yerage3 waraya
         //BufferedReader lel program file
         BufferedReader br = new BufferedReader(new FileReader(filePath));
@@ -103,6 +105,7 @@ public class OS {
         int pc = index+1;//leaving space for variables
         while(br.ready()){
              memory[++index] =  new Word("Instruction",br.readLine());
+            System.out.println(memory[index]);
         }
        return initializePCB(lowerBoundary,pc);
     }
@@ -138,8 +141,8 @@ public class OS {
              int pcIdx = 0;
              int stateIdx = 0;
              if(id!= oldId) {
-                 if(oldId!=-1) System.out.println("The Process with id :"+ oldId+" finished execution with quanta "+ i);
-                 System.out.println("The Process with id :"+id+" has been chosen to run from ready list");
+                 if(oldId!=-1) System.out.println("The Process with id : "+ oldId+" finished execution with quanta "+ i);
+                 System.out.println("The Process with id : "+id+" has been chosen to run from ready list");
                  i=1; oldId=id;
              }
             for (int k = 0; k <100 ; k+=5)
@@ -163,7 +166,6 @@ public class OS {
              else
                  readyQueue.add(id);
         }
-        //todo print
     }
 
 
@@ -180,6 +182,9 @@ public class OS {
         public Word(String k, Object v){
             value=v;
             key=k;
+        }
+        public String toString(){
+            return "word { "+ "Key : "+key + " ,Value : " +value + " } ";
         }
 
     }
