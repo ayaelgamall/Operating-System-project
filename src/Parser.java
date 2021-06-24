@@ -4,9 +4,10 @@ import java.io.IOException;
 
 public class Parser {
     public static void main(String[] args) throws Exception {
-        execute("Program 1.txt");
-        execute("Program 2.txt");
-        execute("Program 3.txt");
+
+//        execute("Program 1.txt");
+//        execute("Program 2.txt");
+//        execute("Program 3.txt");
     }
 
     private static void execute(String programPath) throws IOException {

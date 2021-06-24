@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.Hashtable;
 public class OS {
 
-//    private static Hashtable<String, String> variables = new Hashtable<>(); should use memory[] instead
     private static Word [] memory= new Word[1000];
     private static int PID =0; //increment with each process
     static int PC = 0; //idk hngebo mnen
@@ -14,7 +13,8 @@ public class OS {
 
     private static String readMemory(String x) {
         //if exists in memory get it else return the same x
-        return variables.getOrDefault(x, x);
+        //todo this store the variables in the memory itself
+        return null;
     }
 
     public static void assign(String variable, String value) {
@@ -22,7 +22,7 @@ public class OS {
     }
 
     private static void writeMemory(String variable, String value) {
-         variables.put(variable, value);
+        //todo get vars from memory
     }
 
     public static void add(String x, String y) {
@@ -68,35 +68,41 @@ public class OS {
         return br.readLine();
     }
 
-    public static void initializePCB(String process) {
-        memory[++index] = new Word("lower Boundary", index+1);
+    public static void initializePCB(int lower) {
+        memory[++index] = new Word("lower Boundary", lower);
         memory[++index] =  new Word("startPC",PC);
         memory[++index] =  new Word("ID:", assignID());
         memory[++index] =  new Word("State", state.NotRunnig);
+        index += 3; //leaving space for variables
         memory[++index] =  new Word("Upper Boundary",index+1);
-        //mesh el boundaries el mafroud bta3et el instructions nafsaha mesh el PCB?
     }
     public static void storeProgramInstructions(String filePath) throws IOException {
         //7ad yerage3 waraya
         //BufferedReader lel program file
         BufferedReader br = new BufferedReader(new FileReader(filePath));
         //put each instruction in a new index fel memory
+        int lowerBoundary = index; //wla ++index idk?
         while(br.ready()){
              memory[++index] =  new Word("Instruction",br.readLine());
         }
+        initializePCB(lowerBoundary);
     }
     public static int assignID() {
         return PID++;
     }
-    public static void main(String[] args) {
-        //read processes in order
-        //call initializePCB for each one
+    public static void main(String[] args) throws IOException {
+        //read processes in order - done
         //call storeProgramInstructions
         //store variables (in memory brdo)
         //after doing that for all 3 processes
         //start scheduler
-        //2 instruction for each process then preemt
+        //2 instruction for each process then preempt
         //keep going till all processes finished
+
+        storeProgramInstructions("Program 1.txt");
+        storeProgramInstructions("Program 2.txt");
+        storeProgramInstructions("Program 3.txt");
+
     }
 
     public enum state {
