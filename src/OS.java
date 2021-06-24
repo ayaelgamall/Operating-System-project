@@ -36,9 +36,9 @@ public class OS {
         for (; !memory[i].key.equals("Instruction"); i++) {
             if(memory[i]!=null) continue;
             memory[i]= new Word(variable,value);
+            System.out.println("Word written to the memory is :" +memory[i].toString()+" , its index is :"+i);
             return;
         }
-        //todo print
     }
 
     public static void add(String x, String y, int lower) {
@@ -83,6 +83,7 @@ public class OS {
     }
 
     public static int initializePCB(int lower,int pc) {
+        //todo print
         int id =assignID();
         memory[++pcbIndex] =  new Word("ID:",id );
         memory[++pcbIndex] =  new Word("Upper Boundary",index+1);
@@ -92,6 +93,7 @@ public class OS {
         return id;
     }
     public static int storeProgramInstructions(String filePath) throws IOException {
+        //todo print
         //7ad yerage3 waraya
         //BufferedReader lel program file
         BufferedReader br = new BufferedReader(new FileReader(filePath));
