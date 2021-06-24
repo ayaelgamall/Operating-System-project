@@ -5,7 +5,8 @@ public class OS {
     private static Word [] memory= new Word[1000];
     private static int PID =0; //increment with each process
     static int PC = 0; //idk hngebo mnen
-    public static int index=-1;
+    public static int index=99;
+    public static int pcbindex=-1;
 
     public static void print(String x) {
         System.out.println(readMemory(x));
@@ -13,7 +14,9 @@ public class OS {
 
     private static String readMemory(String x) {
         //if exists in memory get it else return the same x
-        //todo this store the variables in the memory itself
+//         return variables.getOrDefault(x, x);
+        //todo get vars from memory
+
         return null;
     }
 
@@ -22,7 +25,8 @@ public class OS {
     }
 
     private static void writeMemory(String variable, String value) {
-        //todo get vars from memory
+//        variables.put(variable, value);
+        //todo this store the variables in the memory itself
     }
 
     public static void add(String x, String y) {
@@ -69,12 +73,12 @@ public class OS {
     }
 
     public static void initializePCB(int lower) {
-        memory[++index] = new Word("lower Boundary", lower);
-        memory[++index] =  new Word("startPC",PC);
-        memory[++index] =  new Word("ID:", assignID());
-        memory[++index] =  new Word("State", state.NotRunnig);
         index += 3; //leaving space for variables
-        memory[++index] =  new Word("Upper Boundary",index+1);
+        memory[++pcbindex] =  new Word("ID:", assignID());
+        memory[++pcbindex] = new Word("lower Boundary", lower);
+        memory[++pcbindex] =  new Word("Upper Boundary",index+1);
+        memory[++pcbindex] =  new Word("startPC",PC);
+        memory[++pcbindex] =  new Word("State", state.NotRunnig);
     }
     public static void storeProgramInstructions(String filePath) throws IOException {
         //7ad yerage3 waraya
@@ -102,6 +106,7 @@ public class OS {
         storeProgramInstructions("Program 1.txt");
         storeProgramInstructions("Program 2.txt");
         storeProgramInstructions("Program 3.txt");
+
 
     }
 
