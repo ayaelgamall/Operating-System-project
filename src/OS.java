@@ -16,13 +16,15 @@ public class OS {
     private static String readMemory(String x, int i) {
         //if exists in memory get it else return the same x
 //         return variables.getOrDefault(x, x);
-        String res = x;
+
         for (;  memory[i]!=null && !memory[i].key.equals("Instruction"); i++) {
-            if (memory[i].key.equals(x))
-                return (String) memory[i].value;
+            if (memory[i].key.equals(x)){
+                String  res= (String) memory[i].value;
+                System.out.println("Word read from the memory is :" +memory[i].toString()+" , its index is :"+i);
+                return res;
+            }
         }
         return x;
-        //todo print
     }
 
     public static void assign(String variable, String value, int lower) {
